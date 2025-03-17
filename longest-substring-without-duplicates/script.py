@@ -24,19 +24,28 @@
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        cur_len = 0
-        max_len = 0
-        pos = 0
-        letters = list()
-        for i in range(len(s)):
-            if s[i] not in letters:
-                letters.add(s[i])
-                cur_len += 1
-            else:
-                max_len = max(max_len, cur_len)
-                cur_len = i - pos 
-                pos = i
-        return max(cur_len, max_len)
+        p = {}
+        l = 0
+        res = 0
+        for r in range(len(s)):
+            if s[r] in p:
+                l = max(p[s[r]] + 1, l)
+            p[s[r]] = r
+            res = max(res, p[s[r]] - l + 1)
+        return res
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        p = set()
+        l = 0
+        res = 0
+        for r in range(len(s)):
+            while s[r] in p:
+                p.remove(s[l])
+                l += 1
+            p.add(s[r])
+            res = max(res, r - l + 1)
+        return res
 
 input = ["pwwkew","dvdf","abba","abcabcbb","cdd", "aa", "aab"]
 #input = ["aa"]
