@@ -5,7 +5,7 @@ from argparse import ArgumentParser
 def init_readme(directory):
     filename = f"{ directory }/README.md"
     with open(filename,"w") as fp:
-        fp.writelines("## ")
+        fp.writelines(f"## {directory}")
 
 def init_script(directory):
     filename = f"{ directory }/script.py"
